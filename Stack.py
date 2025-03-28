@@ -1,16 +1,24 @@
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
 class Stack:
     def __init__(self):
-        self._items = []  # Lista privada para almacenar los elementos
+        self.top = None  # Ultimo nodo
 
     def push(self, item):
-        """Agrega un elemento a la pila."""
-        self._items.append(item)
+        new_node = Node(item)
+        new_node.next = self.top
+        self.top = new_node
 
     def pop(self):
-        """Elimina y devuelve el último elemento de la pila."""
-        return self._items.pop() if self._items else None
+        if self.top is None:
+            return None  # Pila vacia
+        popped_value = self.top.value
+        self.top = self.top.next
+        return popped_value
 
-# Ejemplo de uso
 stack = Stack()
 stack.push(1)
 stack.push(2)
@@ -23,4 +31,4 @@ print(stack.pop())  # 4
 print(stack.pop())  # 3
 print(stack.pop())  # 2
 print(stack.pop())  # 1
-print(stack.pop())  # None (pila vacía)
+print(stack.pop())  # Pila vacia
